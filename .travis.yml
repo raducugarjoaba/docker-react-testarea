@@ -6,3 +6,16 @@ before_install:
 
 script:
   - docker run radu/docker-react-testarea npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1" 
+  app: "docker-react-testarea"
+  env: "DockerReactTestarea-env"
+  bucket_name: "elasticbeanstalk-us-east-1-990163110259"
+  bucket_path: "docker-react-testarea"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secrety_access_key:
+    secure: "$AWS_SECRET_KEY"
